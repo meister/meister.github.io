@@ -2,7 +2,7 @@
 
 name: Build Site
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   workflow_dispatch:
     inputs:
@@ -15,5 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "Hello ${{ github.event.inputs.name }}!"
-        echo "- in ${{ github.event.inputs.home }}!"
+        echo "Hello! Started build on version ${{ github.event.inputs.version }}!"
