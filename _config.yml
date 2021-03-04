@@ -5,3 +5,4 @@ author:
   email: martin@coderats.net
 description: > # this means to ignore newlines until "show_excerpts:"
   Github home for meister. Just run `npx meister`.
+remote_theme: meister/jekyll-pure
