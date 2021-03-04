@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: env
+    - run: ls -lR ${GITHUB_WORKSPACE}
+    - run: ls -lR ${GITHUB_PATH}
     - run: |
         echo "Hello! Started build on version ${{ github.event.inputs.version }}!"
     - uses: actions/setup-node@v2
