@@ -1,4 +1,6 @@
-
+---
+layout:home
+---
                                │                                                
    █▀▀▀▀▀█ ▄█ ▄▄▄█   █▀▀▀▀▀█   │                                                
    █ ███ █ ▄█▀█   ▄▀ █ ███ █   │   <span class="color-229">Martin Kapp</span> <span class="color-90">/</span> <span class="color-215">meister</span>                        <br/>
