@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-outdir=${RUNNER_WORKSPACE:-.}
+outdir=${GITHUB_WORKSPACE:-.}
 
 npx meister |
 	sed -E 's/\[39m/<\/span>/g' |
