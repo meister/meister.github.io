@@ -9,9 +9,10 @@ on:
         required: true
 
 jobs:
-  say_hello:
+  build_site:
     runs-on: ubuntu-latest
     steps:
+    - run: env
     - run: |
         echo "Hello! Started build on version ${{ github.event.inputs.version }}!"
     - uses: actions/setup-node@v2

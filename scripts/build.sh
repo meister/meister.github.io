@@ -1,4 +1,5 @@
-# npx meister > index.md
+#!/usr/bin/env bash
+
 npx meister |
 	sed -E 's/\[39m/<\/span>/g' |
 	sed -E 's/\[90m/<span class="color-90">/g' |
