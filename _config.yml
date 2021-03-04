@@ -1,8 +1,11 @@
 
 title: meister.github.io
+
 author:
   name: meister
   email: martin@coderats.net
-description: > # this means to ignore newlines until "show_excerpts:"
+
+description: >
   Github home for meister. Just run `npx meister`.
+  
 remote_theme: meister/jekyll-pure
