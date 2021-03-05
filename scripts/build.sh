@@ -6,7 +6,7 @@ cat "${workdir}/_top.md" > "${workdir}/index.md"
 
 npx meister |
 	sed '/^$/d' |
-	sed 's/[[:blank:]]*$//' |
+	sed 's/[[:blank:]]{2,}$/  /' |
 	# sed 's|$|<br/>|' |
 	sed -E 's/\[39m/<\/span>/g' |
 	sed -E 's/\[90m/<span class="color-90">/g' |
