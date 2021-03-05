@@ -21,23 +21,13 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
-    # - run: ${GITHUB_WORKSPACE}/scripts/build.sh
     - name: Build Site index
       run: ${GITHUB_WORKSPACE}/scripts/build.sh
-      # run: |
-      #   npx meister |
-      #     sed '/^$/d' |
-      #     sed 's/[[:blank:]]*$//' |
-      #     sed 's|$|<br/>|' |
-      #     sed -E 's/\[39m/<\/span>/g' |
-      #     sed -E 's/\[90m/<span class="color-90">/g' |
-      #     sed -E 's/\[38\;5\;([0-9]+)m/<span class="color-\1">/g' \
-      #     > index.md
     - name: Commit & push updates to Github
       run: |
         git config user.name ${GITHUB_ACTOR}
         git config user.email gh-actions-${GITHUB_ACTOR}@github.com
-        git add index.html
+        git add .
         git commit -m "Updated contents from ${{ github.event.inputs.version }}"
         git remote add gh-origin https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
         git push gh-origin HEAD:master
