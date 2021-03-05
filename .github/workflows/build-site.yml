@@ -23,15 +23,16 @@ jobs:
         node-version: '14'
     # - run: ${GITHUB_WORKSPACE}/scripts/build.sh
     - name: Build Site index
-      run: |
-        npx meister |
-          sed '/^$/d' |
-          sed 's/[[:blank:]]*$//' |
-          sed 's|$|<br/>|' |
-          sed -E 's/\[39m/<\/span>/g' |
-          sed -E 's/\[90m/<span class="color-90">/g' |
-          sed -E 's/\[38\;5\;([0-9]+)m/<span class="color-\1">/g' \
-          > index.html
+      run: ${GITHUB_WORKSPACE}/scripts/build.sh
+      # run: |
+      #   npx meister |
+      #     sed '/^$/d' |
+      #     sed 's/[[:blank:]]*$//' |
+      #     sed 's|$|<br/>|' |
+      #     sed -E 's/\[39m/<\/span>/g' |
+      #     sed -E 's/\[90m/<span class="color-90">/g' |
+      #     sed -E 's/\[38\;5\;([0-9]+)m/<span class="color-\1">/g' \
+      #     > index.md
     - name: Commit & push updates to Github
       run: |
         git config user.name ${GITHUB_ACTOR}
