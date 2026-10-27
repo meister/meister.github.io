@@ -8,7 +8,7 @@ layout: home
    █ ███ █ ▄█▀█   ▄▀ █ ███ █   │   <span class="color-229">Martin Kapp</span> <span class="color-90">/</span> <span class="color-215">meister</span>                                 
    █ ▀▀▀ █ ▄ █ ▀▄█ ▀ █ ▀▀▀ █   │                                                         
    ▀▀▀▀▀▀▀ ▀ ▀ █ █ ▀ ▀▀▀▀▀▀▀   │                                                         
-   ▀██▀█ ▀█▀█▀ ▀  ▀▄█ █▄▀ ▀▄   │   <span class="color-84">Head of Engineering, Frontend Platform</span> <span class="color-215">@ Pipedrive</span>    
+   ▀██▀█ ▀█▀█▀ ▀  ▀▄█ █▄▀ ▀▄   │   <span class="color-84">Principal Engineering Lead</span> <span class="color-215">@ Pipedrive</span>                
    █▀▀▄▀▄▀█▀█▄█▀▀█ ▄▀▀ ▀ ▀     │                                                         
    ▄██▀▀▀▀ ▀▀▄▀▄  █▀█▄██▀ ▀▀   │                                                         
    █  ▄██▀ ▄▄█ ▄█  ▄▀▀ ▀ ▀██   │   Github:    <span class="color-215">https://github.com/meister</span>                 
