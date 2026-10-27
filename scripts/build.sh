@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
-
-workdir=${GITHUB_WORKSPACE:-.}
-
-cat "${workdir}/_top.md" > "${workdir}/index.md"
-
-npx meister |
-	sed '/^$/d' |
-	sed 's/[[:blank:]]{2,}$/  /' |
-	# sed 's|$|<br/>|' |
-	sed -E 's/\[39m/<\/span>/g' |
-	sed -E 's/\[90m/<span class="color-90">/g' |
-	sed -E 's/\[38\;5\;([0-9]+)m/<span class="color-\1">/g' \
-	>> "${workdir}/index.md"
-
-cat "${workdir}/_bottom.md" >> "${workdir}/index.md"
+set -euo pipefail
+workdir=${GITHUB_WORKSPACE:-$(cd "$(dirname "$0")/.." && pwd)}
+version=${1:-latest}
+output=$(mktemp)
+trap 'rm -f "$output"' EXIT
+if [[ -n "${MEISTER_CLI:-}" ]]; then
+  node "$MEISTER_CLI" > "$output"
+else
+  npm exec --yes --package="meister@$version" -- meister > "$output"
+fi
+node "$workdir/scripts/render-card.js" "$output" "$workdir"

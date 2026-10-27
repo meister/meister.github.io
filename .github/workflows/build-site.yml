@@ -1,35 +1,50 @@
 name: Build Site
-
-# Controls when the action will run.
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version of the library'
+        description: Published npm version (or latest)
         required: true
-
+        default: latest
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
 jobs:
   build_site:
     runs-on: ubuntu-latest
     steps:
-    - run: env
-    - run: ls -lR ${GITHUB_WORKSPACE}
-    - run: ls -lR ${GITHUB_PATH}
-    - run: |
-        echo "Hello! Started build on version ${{ github.event.inputs.version }}!"
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - name: Build Site index
-      run: ${GITHUB_WORKSPACE}/scripts/build.sh
-    - name: Commit & push updates to Github
-      run: |
-        git config user.name ${GITHUB_ACTOR}
-        git config user.email gh-actions-${GITHUB_ACTOR}@github.com
-        git add .
-        git commit -m "Updated contents from ${{ github.event.inputs.version }}"
-        git remote add gh-origin https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
-        git push gh-origin HEAD:master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build site index
+        env:
+          VERSION: ${{ inputs.version }}
+        run: bash scripts/build.sh "$VERSION"
+      - name: Commit generated content
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "gh-actions-${GITHUB_ACTOR}@github.com"
+          git add index.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Update content from meister@$VERSION"
+            git push origin HEAD:master
+          fi
+      # GITHUB_TOKEN pushes do not trigger branch-based Pages builds.
+      - uses: actions/configure-pages@v5
+      - uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/deploy-pages@v4
+        id: deployment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
